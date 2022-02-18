@@ -8,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.ads.adshelpdesk.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Tecnico extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore  // ignora a lista 
 	@OneToMany(mappedBy = "tecnico") //foi chamado por tecnico (um para muitos)
 	private List<Chamado> chamados = new ArrayList<>(); // pega objtos da classe Chamados
 
