@@ -1,5 +1,8 @@
 package com.ads.adshelpdesk.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,4 +31,15 @@ public class ChamadoResource {
 		return ResponseEntity.ok().body(new ChamadoDTO(obj));
 		
 	}
+
+	@GetMapping // listar todos Chamados
+	public ResponseEntity<List<ChamadoDTO>> findAll() {
+		
+		List<Chamado> list = service.findAll();
+																// retorno map de objetos
+		List<ChamadoDTO> lisDTO = list.stream().map(obj -> new ChamadoDTO(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(lisDTO);
+	}
+	
 }
